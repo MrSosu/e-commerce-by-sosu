@@ -1,4 +1,4 @@
-package com.sosu.ordini.domain.dto;
+package com.sosu.ordini.domain.dto.request;
 
 import com.sosu.ordini.domain.enums.PaymentMethod;
 import jakarta.validation.constraints.Positive;

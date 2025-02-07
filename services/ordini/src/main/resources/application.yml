@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: ordini-service
+  config:
+    import: optional:configserver:http://localhost:8888
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/ordini
+    username: sosu
+    password: mypassword
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+
+server:
+  port: 8072
+
+application:
+  config:
+    user-url: http://localhost:8070/api/v1/utenti
+    prodotti-url: http://localhost:8071/api/v1/prodotti
+    payment-url: http://localhost:8073/api/v1/payments

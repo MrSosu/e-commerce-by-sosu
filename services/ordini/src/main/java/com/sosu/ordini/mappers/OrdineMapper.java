@@ -1,7 +1,7 @@
 package com.sosu.ordini.mappers;
 
-import com.sosu.ordini.domain.dto.OrdineRequest;
-import com.sosu.ordini.domain.dto.OrdineResponse;
+import com.sosu.ordini.domain.dto.request.OrdineRequest;
+import com.sosu.ordini.domain.dto.response.OrdineResponse;
 import com.sosu.ordini.domain.entities.Ordine;
 import com.sosu.ordini.services.CarrelloService;
 import org.springframework.beans.factory.annotation.Autowired;

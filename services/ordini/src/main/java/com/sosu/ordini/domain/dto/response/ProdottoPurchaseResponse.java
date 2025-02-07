@@ -1,6 +1,6 @@
-package com.example.prodotti.dto;
+package com.sosu.ordini.domain.dto.response;
 
-import lombok.*;
+import lombok.Builder;
 
 @Builder
 public record ProdottoPurchaseResponse(

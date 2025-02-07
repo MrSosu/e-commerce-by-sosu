@@ -1,15 +1,17 @@
 package com.sosu.ordini.services;
 
-import com.sosu.ordini.domain.dto.OrdineIdResponse;
-import com.sosu.ordini.domain.dto.OrdineRequest;
-import com.sosu.ordini.domain.dto.OrdineResponse;
-import com.sosu.ordini.domain.dto.OrdineUpdateRequest;
+import com.sosu.ordini.domain.dto.request.ProdottoPurchaseRequest;
+import com.sosu.ordini.domain.dto.response.OrdineIdResponse;
+import com.sosu.ordini.domain.dto.request.OrdineRequest;
+import com.sosu.ordini.domain.dto.response.OrdineResponse;
+import com.sosu.ordini.domain.dto.request.OrdineUpdateRequest;
 import com.sosu.ordini.domain.entities.Ordine;
 import com.sosu.ordini.exceptions.OrdineNotFoundException;
 import com.sosu.ordini.mappers.OrdineMapper;
 import com.sosu.ordini.repositories.OrdineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrdineService {
@@ -18,6 +20,10 @@ public class OrdineService {
     private OrdineRepository ordineRepository;
     @Autowired
     private OrdineMapper ordineMapper;
+    @Autowired
+    private UtenteClient utenteClient;
+    @Autowired
+    private ProdottoClient prodottoClient;
 
     public OrdineResponse getOrdineById(Long id) {
         Ordine ordine = ordineRepository
@@ -37,13 +43,21 @@ public class OrdineService {
 
     public OrdineIdResponse createOrdine(OrdineRequest request) {
         // 1) verifico se l'utente esiste
-
+        var utente = utenteClient.getUtenteById(request.idUtente());
         // 2) chiamo il metodo purchaseProducts per aggiornare il database dei prodotti
-
+        List<ProdottoPurchaseRequest> requests = new ArrayList<>();
+        requests.add(
+                ProdottoPurchaseRequest
+                        .builder()
+                        .id_prodotto(request.idProdotto())
+                        .quantita(request.quantity())
+                        .build()
+        );
+        var purchasedProducts = prodottoClient.purchaseProdotti(requests).getFirst();
         // 3) creo effettivamente l'ordine e lo salvo
-
-        // 4) notificare il servizio di pagamento
-        return null;
+        var ordine = ordineRepository.save(ordineMapper.toEntity(request));
+        // TODO 4) notificare il servizio di pagamento
+        return OrdineIdResponse.builder().idOrdine(ordine.getId()).build();
     }
 
 

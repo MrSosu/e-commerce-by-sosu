@@ -1,9 +1,9 @@
 package com.sosu.ordini.controllers;
 
-import com.sosu.ordini.domain.dto.OrdineIdResponse;
-import com.sosu.ordini.domain.dto.OrdineRequest;
-import com.sosu.ordini.domain.dto.OrdineResponse;
-import com.sosu.ordini.domain.dto.OrdineUpdateRequest;
+import com.sosu.ordini.domain.dto.response.OrdineIdResponse;
+import com.sosu.ordini.domain.dto.request.OrdineRequest;
+import com.sosu.ordini.domain.dto.response.OrdineResponse;
+import com.sosu.ordini.domain.dto.request.OrdineUpdateRequest;
 import com.sosu.ordini.services.OrdineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
