@@ -11,7 +11,7 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
     serviceUrl:
-      default-zone: http://${eureka.instance.hostname}/${server.port}/eureka/
+      default-zone: http://${eureka.instance.hostname}:8761/eureka/
 
 server:
   port: 8761

@@ -1,11 +1,11 @@
 spring:
   application:
-    name: user-service
+    name: prodotti-service
   config:
     import: optional:configserver:http://localhost:8888
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/utenti
+    url: jdbc:postgresql://localhost:5432/prodotti
     username: sosu
     password: mypassword
   jpa:
@@ -16,4 +16,4 @@ spring:
     show-sql: true
 
 server:
-  port: 8070
+  port: 8071
