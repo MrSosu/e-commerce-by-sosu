@@ -7,13 +7,18 @@ import com.sosu.ordini.domain.dto.response.OrdineResponse;
 import com.sosu.ordini.domain.dto.request.OrdineUpdateRequest;
 import com.sosu.ordini.domain.entities.Ordine;
 import com.sosu.ordini.exceptions.OrdineNotFoundException;
+import com.sosu.ordini.kafka.OrderConfirmation;
+import com.sosu.ordini.kafka.OrderProducer;
 import com.sosu.ordini.mappers.OrdineMapper;
 import com.sosu.ordini.repositories.OrdineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class OrdineService {
 
     @Autowired
@@ -24,6 +29,8 @@ public class OrdineService {
     private UtenteClient utenteClient;
     @Autowired
     private ProdottoClient prodottoClient;
+    @Autowired
+    private OrderProducer orderProducer;
 
     public OrdineResponse getOrdineById(Long id) {
         Ordine ordine = ordineRepository
@@ -57,6 +64,14 @@ public class OrdineService {
         // 3) creo effettivamente l'ordine e lo salvo
         var ordine = ordineRepository.save(ordineMapper.toEntity(request));
         // TODO 4) notificare il servizio di pagamento
+        orderProducer.sendConfermaOrdine(OrderConfirmation
+                .builder()
+                .id(ordine.getId())
+                .paymentMethod(ordine.getPaymentMethod())
+                .quantity(ordine.getQuantity())
+                .idProdotto(ordine.getIdProdotto())
+                .timestamp(LocalDateTime.now())
+                .build());
         return OrdineIdResponse.builder().idOrdine(ordine.getId()).build();
     }
 

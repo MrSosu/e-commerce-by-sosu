@@ -29,7 +29,6 @@ public class Carrello {
     private Long id;
     @OneToMany(mappedBy = "carrello")
     private List<Ordine> ordini;
-    @ManyToOne
     private Long idUtente;
     private Double totalAmount;
 
