@@ -72,6 +72,15 @@ services:
     networks:
       - sosu_network
 
+  mail-dev:
+    container_name: sosu_maildev
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+    networks:
+      - sosu_network
+
 
 
 

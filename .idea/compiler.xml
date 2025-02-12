@@ -17,9 +17,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="ordini" />
+        <module name="notifications" />
       </profile>
     </annotationProcessing>
   </component>
@@ -27,6 +28,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="config-server" options="-parameters" />
       <module name="discovery" options="-parameters" />
+      <module name="notifications" options="-parameters" />
       <module name="ordini" options="-parameters" />
       <module name="prodotti" options="-parameters" />
       <module name="user" options="-parameters" />

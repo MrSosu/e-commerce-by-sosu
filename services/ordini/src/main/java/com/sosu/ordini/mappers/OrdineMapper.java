@@ -30,7 +30,7 @@ public class OrdineMapper {
                 .idProdotto(request.idProdotto())
                 .quantity(request.quantity())
                 .paymentMethod(request.paymentMethod())
-                .carrello(carrelloService.getCarrelloById(request.idCarrello()))
+                .carrello(carrelloService.getCarrello(request.idCarrello()))
                 .build();
     }
 
